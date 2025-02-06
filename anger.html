@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anger</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e3f2fd;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(90deg, #e24ab4, #cb119c77);
+            border-radius: 100px;
+            max-width: 100%;
+            color: white;
+            text-align: center;
+            padding: 0.5rem;
+            font-size: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .slideshow-container {
+            position: relative;
+            max-width: 85%;
+            margin: auto;
+            overflow: hidden;
+            border-radius: 70px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .slides {
+            display: none;
+            width: 100%;
+        }
+        .slideshow-container img {
+            width: 100%;
+            height: auto;
+        }
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            padding: 1rem;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+        }
+        .prev {
+            left: 20px;
+        }
+        .next {
+            right: 20px;
+        }
+        .section {
+            padding: 2rem;
+            margin: 1rem;
+            background: rgba(245, 173, 239, 0.493);
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        .section img {
+            width: 50%;
+            border-radius: 100px;
+        }
+        .image-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem 0;
+        }
+        
+        .image-center img {
+            width: auto;
+            max-width: 80%; /* Adjust this as needed */
+            aspect-ratio: 16/9; /* Ensures the 16:9 ratio */
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+          
+         /* Video Section */
+         .video-section {
+            margin: 20px 0;
+            background-color: #e24ab45d;
+            backdrop-filter: blur(2px);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(197, 8, 156, 0.199);
+            text-align: center;
+        }
+
+        .video-section video {
+            max-width: 70%;
+            border-radius: 60px;
+        }
+        .services {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            overflow-x: auto;
+            margin: 1rem;
+        }
+        .service-card {
+            flex: 0 0 300px;
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1), -6px -6px 12px rgba(255, 255, 255, 0.9);
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+        .service-card:hover {
+            transform: scale(1.1);
+        }
+        .service-card img {
+            border-radius: 50%;
+            width: 80px;
+            margin-bottom: 1rem;
+        }
+        .service-card button {
+            padding: 0.5rem 1rem;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .service-card button:hover {
+            background-color: #357abd;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            animation: popup-slide-in 0.5s ease-out;
+        }
+        .popup img {
+            width: auto;
+            max-width: 80%; /* Adjust this as needed */
+            aspect-ratio: 16/9; /* Ensures the 16:9 ratio */
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 0.5rem;
+            cursor: pointer;
+        }
+
+        @keyframes popup-slide-in {
+            from {
+                transform: translate(-50%, -60%);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, -50%);
+                opacity: 1;
+            }
+        }
+        /* Footer Styles */
+footer {
+    background: #6a0dad;
+    color: white;
+    padding: 3rem 2rem;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .footer-section {
+    margin: 0;
+  }
+  
+  .footer-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #f3efff;
+  }
+  
+  .footer-section p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-section ul li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .footer-section ul li a {
+    color: #f3efff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+  }
+  
+  .footer-section ul li a:hover {
+    color: #e0c1f4;
+  }
+  
+  .social-links a {
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+  }
+  
+  .social-links a:hover {
+    transform: scale(1.2);
+  }
+  
+  .social-links img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .social-links img:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    border-top: 3px solid rgba(255, 255, 255, 0.3);
+    padding-top: 1rem;
+  }
+  
+  .footer-bottom p {
+    font-size: 0.8rem;
+    margin: 0;
+  }
+  
+  .footer-bottom a {
+    color: #f3efff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-bottom a:hover {
+    color: #e0c1f4;
+  }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Cerebro</h1>
+        <h2>Understanding Anger</h2>
+    </header>
+
+    <!-- Slideshow -->
+    <div class="slideshow-container">
+        <br>
+        <img class="slides" src="s22.jpg" alt=" ">
+        <img class="slides" src="s55.jpg" alt=" ">
+       <img class="slides" src="s66.jpg" alt=" ">
+        <img class="slides" src="s77.jpg" alt=" ">
+        <button class="arrow prev" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="arrow next" onclick="changeSlide(1)">&#10095;</button>
+        
+    </div>
+
+    <!-- Content Sections -->
+    <div class="section">
+        <div class="sec">
+        <div>
+            <h2>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Anger<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<</h2>
+            <pre style="font-family: 'Poppins', sans-serif;"> 
+                                                                                                  Anger is a complex and universal human emotion characterized by feelings of frustration,
+                                                                        hostility, and antagonism towards oneself, others, or situations. It is a natural response to perceived threats, injustices, or obstacles, 
+                                                                         and can manifest in various forms, such as irritability, resentment, or rage. Anger can be triggered by internal factors, like personal 
+                                                    values or expectations, or external factors, like social or environmental stressors. While anger can serve as a motivating force for change and assertiveness, 
+                                                excessive or mismanaged anger can lead to negative consequences, including damaged relationships, physical health problems, and impaired mental well-being. 
+                                                        Understanding the causes, signs, and effects of anger is essential for developing effective coping strategies and promoting emotional well-being.</pre>
+        </div>
+    </div></div>
+    <div class="image-center">
+        <img src="8...jpg" alt="Symptoms">
+    </div>
+    
+    <div class="section">
+        <div>
+            <h2>causes</h2>
+            <pre style="font-family: 'Poppins', sans-serif;">
+1. Frustration: Feeling blocked or thwarted in achieving goals or desires.
+
+2. Injustice: Perceiving unfairness or inequality in personal or social situations.
+
+3. Fear: Feeling threatened, vulnerable, or insecure.
+
+4. Resentment: Holding onto past hurts, grievances, or perceived wrongs.
+
+5. Stress: Experiencing overwhelming physical, emotional, or mental demands.
+
+6. Disappointment: Having expectations or hopes unmet or shattered.
+
+7. Lack of control: Feeling powerless or trapped in situations.
+
+8. Practice gratitude: Reflect on things you're grateful for each day to shift focus away from negative emotions.
+
+9. Take breaks: Regularly take short breaks to relax and recharge.
+
+10. Seek professional help: If anger is impacting daily life, consider seeking help from a mental health professional.
+
+11. Learn to forgive: Practice forgiveness towards yourself and others to reduce resentment.
+
+12. Practice mindfulness: Focus on the present moment and let go of worries about the past or future.
+
+13. Set boundaries: Establish clear boundaries with others to protect time, energy, and emotional well-being.
+
+</pre>
+        </div>
+        <div>
+            <h2>Prevention</h2>
+            <pre style="font-family: 'Poppins', sans-serif;">
+    Emotional Regulation
+
+    1. Mindfulness: Practice being present in the moment.
+    2. Deep breathing: Calm yourself with slow, deliberate breaths.
+    3. Physical exercise: Regular activity reduces stress and anxiety.
+                
+    Communication Skills
+            
+    1. Active listening: Hear others out before responding.
+    2. "I" statements: Express feelings without blaming others.
+    3. Assertiveness: Stand up for yourself without aggression.
+                
+    Stress Management
+            
+    1. Time management: Prioritize tasks to reduce overwhelm.
+    2. Relaxation techniques: Explore methods like progressive muscle relaxation.
+    3. Leisure activities: Engage in hobbies to reduce stress.
+            
+    Self-Awareness
+                
+    1. Identify triggers: Recognize situations that spark anger.
+    2. Emotional awareness: Understand your emotions and their intensity.
+    3. Journaling: Record thoughts and feelings to process emotions.
+                </pre>
+        </div>
+    <div>
+
+        
+    </div>
+    </div>
+        
+            <div class="video-section">
+                <video controls>
+                    <source src="yoga.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+   
+
+    <!-- Service Cards -->
+    <div class="services">
+        <div class="service-card" onclick="showPopup(1)">
+            <img src="10.jpg" alt="Type 1">
+            <h3>Chronic anger</h3>
+            <button>Read More</button>
+        </div>
+        <div class="service-card" onclick="showPopup(2)">
+            <img src="2.jpg" alt="Type 2">
+            <h3>Sudden Anger</h3>
+            <button>Read More</button>
+        </div>
+        <div class="service-card" onclick="showPopup(3)">
+            <img src="3.jpg" alt="Type 3">
+            <h3>Passive-aggressive anger</h3>
+            <button>Read More</button>
+        </div>
+        <div class="service-card" onclick="showPopup(4)">
+            <img src="4.jpg" alt="Type 4">
+            <h3>Aggressive Anger</h3>
+            <button>Read More</button>
+        </div>
+        <div class="service-card" onclick="showPopup(5)">
+            <img src="7.jpg" alt="Type 5">
+            <h3>Assertive anger</h3>
+            <button>Read More</button>
+        </div>
+    </div>
+
+    <!-- Popup and Overlay -->
+    <div class="overlay" onclick="closePopup()"></div>
+    <div class="popup" id="popup">
+        <button class="close-btn" onclick="closePopup()">&times;</button>
+        <h2 id="popup-title"></h2>
+        <img id="popup-image" src="" alt="">
+        <p id="popup-content"></p>
+    </div>
+    <footer>
+        <div class="footer-container">
+          <!-- About Us Section -->
+          <div class="footer-section about">
+            <h3>About Cerebro</h3>
+            <p>Cerebro is dedicated to helping individuals achieve mental wellness through personalized support and practical resources. Our mission is to empower you to live a happier, more fulfilling life.</p>
+            <p>Join us on this journey toward better mental health and personal growth.</p>
+          </div>
+      
+          <!-- Quick Links Section -->
+          <div class="footer-section links">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li><a href="#">FAQs</a></li>
+              <li><a href="#">Blog</a></li>
+            </ul>
+          </div>
+      
+          <!-- Contact Section -->
+          <div class="footer-section contact">
+            <h3>Contact Us</h3>
+            <p><strong>Address:</strong>Government College University Faisalabad</p>
+            <p><strong>Email:</strong> support@cerebro.com</p>
+            <p><strong>Phone:</strong> +1 (123) 456-7890</p>
+          </div>
+      
+          <!-- Social Media Section -->
+          <div class="footer-section social">
+            <h3>Follow Us</h3>
+            <p>Stay connected with us on social media:</p>
+            <div class="social-links">
+              <a href="#"><img src="fb.jpg" alt="Facebook"></a>
+              <a href="#"><img src="tw.jpg" alt="Twitter"></a>
+              <a href="#"><img src="in.jpg" alt="Instagram"></a>
+              <a href="#"><img src="link.jpeg" alt="LinkedIn"></a>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+          <p>© 2024 Cerebro | All Rights Reserved | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+      </footer>
+    <script>
+        let slideIndex = 0;
+
+        function showSlides() {
+            let slides = document.querySelectorAll('.slides');
+            slides.forEach((slide, index) => {
+                slide.style.display = index === slideIndex ? 'block' : 'none';
+            });
+            slideIndex = (slideIndex + 1) % slides.length;
+            setTimeout(showSlides, 3000);
+        }
+
+        function changeSlide(n) {
+            let slides = document.querySelectorAll('.slides');
+            slideIndex = (slideIndex + n + slides.length) % slides.length;
+            slides.forEach((slide, index) => {
+                slide.style.display = index === slideIndex ? 'block' : 'none';
+            });
+        }
+
+        showSlides();
+
+        function showPopup(cardIndex) {
+            const popupData = [
+            {
+                title: 'Chronic anger',
+                image: '9.jpg',
+                content: [
+                  'Chronic anger is a persistent and ongoing emotional state characterized by feelings of resentment, frustration, and irritability. This type of anger can last for a long time, sometimes months or even years, and can be challenging to manage. Individuals experiencing chronic anger may feel like they are constantly "on edge" and may have difficulty relaxing or feeling at peace. Chronic anger can also lead to physical symptoms like headaches, stomach problems, and sleep disturbances.'],
+              },
+              
+              
+                {
+                    title: 'Sudden Anger',
+                    image: '3.jpg',
+                    content: 'Sudden anger, also known as episodic anger, is a type of anger that arises suddenly and intensely, often in response to a specific trigger. This type of anger can be overwhelming and may lead to impulsive behaviors, like yelling or throwing objects. Sudden anger can be triggered by various factors, such as stress, frustration, or perceived injustice. Individuals prone to sudden anger may benefit from learning relaxation techniques and developing healthier coping mechanisms.'
+                },
+                {
+                    title: 'Passive-aggressive anger',
+                    image: 'new.jpg',
+                    content: 'Passive-aggressive anger is a type of anger characterized by indirect expressions of anger, such as sulking, procrastination, or sarcasm. Individuals with passive-aggressive anger may avoid direct confrontation or conflict, instead using subtle behaviors to express their anger. This type of anger can be challenging to recognize, as it often manifests in covert ways. Passive-aggressive anger can damage relationships and lead to feelings of resentment and frustration.'},
+                {
+                    title: 'Aggressive Anger',
+                    image: '4.jpg',
+                    content: 'Aggressive anger is a type of anger characterized by direct and forceful expressions of anger, such as verbal or physical aggression. This type of anger can be intense and overwhelming, leading to destructive behaviors like yelling, hitting, or throwing objects. Aggressive anger can be triggered by various factors, such as stress, frustration, or perceived injustice. Individuals prone to aggressive anger may benefit from seeking professional help to develop healthier coping mechanisms.'
+                },
+                {
+                    title: 'Assertive anger',
+                    image: '6.jpg',
+                    content: 'Assertive anger is a type of anger characterized by expressing anger in a healthy and constructive way to stand up for oneself. This type of anger is often accompanied by a sense of self-respect and confidence. Assertive anger involves setting clear boundaries, expressing feelings and needs, and seeking solutions to problems. Individuals with assertive anger tend to have healthier relationships and better overall well-being.'
+                }
+            ];
+
+            const data = popupData[cardIndex - 1];
+            document.getElementById('popup-title').innerText = data.title;
+            document.getElementById('popup-image').src = data.image;
+            document.getElementById('popup-content').innerText = data.content;
+            document.querySelector('.overlay').style.display = 'block';
+            document.querySelector('.popup').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.querySelector('.overlay').style.display = 'none';
+            document.querySelector('.popup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

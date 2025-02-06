@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cerebro - Understanding Anxiety</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(90deg, #f882e4, #fe00d42d);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        .slideshow {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: 2rem auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 100%;
+        }
+        .slides img {
+            width: auto; /* Maintain aspect ratio */
+            height: 400px; /* Set a fixed height */
+            margin: auto; /* Center images vertically */
+            object-fit: cover; /* Ensure the images fill the set height proportionally */
+            border-radius: 15px;
+        }
+        .slideshow-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        .slideshow-buttons button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 1rem;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        .slideshow-buttons button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .hero {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('anxiety-hero.jpg') no-repeat center center/cover;
+            height: 60vh;
+            color: rgb(250, 210, 238);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.897);
+            text-align: center;
+        }
+        .hero h2 {
+            font-size: 2.5rem;
+        }
+        .section {
+            padding: 2rem;
+            margin: 2rem;
+            background: rgb(236, 189, 225);
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .section img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 10px;
+            margin: 1rem auto;
+            display: block;
+        }
+        .section h2 {
+            margin-top: 0;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+           /* Video Section */
+           .video-section {
+            margin: 20px 0;
+            background-color: #e24ab45d;
+            backdrop-filter: blur(2px);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(197, 8, 156, 0.199);
+            text-align: center;
+        }
+
+        .video-section video {
+            max-width: 70%;
+            border-radius: 60px;
+        }
+        .services {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            overflow-x: auto;
+            margin: 2rem 0;
+            scroll-behavior: smooth;
+        }
+        .services::-webkit-scrollbar {
+            height: 10px;
+        }
+        .services::-webkit-scrollbar-thumb {
+            background: #fa04bc;
+            border-radius: 5px;
+        }
+        .service-card {
+            flex: 0 0 300px;
+            background: linear-gradient(145deg, #f5a0d4, #e6e6e6);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1), -6px -6px 12px rgba(255, 255, 255, 0.9);
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+        .service-card:hover {
+            transform: scale(1.05);
+        }
+        .service-card img {
+            border-radius: 50%;
+            width: 80px;
+            margin-bottom: 1rem;
+        }
+        .service-card button {
+            padding: 0.5rem 1rem;
+            background-color: #4facfe;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .service-card button:hover {
+            background-color: #039be5;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            animation: popup-slide-in 0.5s ease-out;
+        }
+        .popup img {
+            width: auto;
+            max-width: 80%; /* Adjust this as needed */
+            aspect-ratio: 16/9; /* Ensures the 16:9 ratio */
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 0.5rem;
+            cursor: pointer;
+        }
+
+        @keyframes popup-slide-in {
+            from {
+                transform: translate(-50%, -60%);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, -50%);
+                opacity: 1;
+            }
+        }
+
+          /* Footer Styles */
+footer {
+    background: #6a0dad;
+    color: white;
+    padding: 3rem 2rem;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .footer-section {
+    margin: 0;
+  }
+  
+  .footer-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #f3efff;
+  }
+  
+  .footer-section p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-section ul li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .footer-section ul li a {
+    color: #f3efff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+  }
+  
+  .footer-section ul li a:hover {
+    color: #e0c1f4;
+  }
+  
+  .social-links a {
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+  }
+  
+  .social-links a:hover {
+    transform: scale(1.2);
+  }
+  
+  .social-links img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .social-links img:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    border-top: 3px solid rgba(255, 255, 255, 0.3);
+    padding-top: 1rem;
+  }
+  
+  .footer-bottom p {
+    font-size: 0.8rem;
+    margin: 0;
+  }
+  
+  .footer-bottom a {
+    color: #f3efff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-bottom a:hover {
+    color: #e0c1f4;
+  }
+    </style>
+    <script>
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            const slides = document.querySelector('.slides');
+            const totalSlides = document.querySelectorAll('.slides img').length;
+            currentSlide = (index + totalSlides) % totalSlides;
+            slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        setInterval(nextSlide, 5000);
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Cerebro - Understanding Anxiety</h1>
+    </header>
+
+    <div class="slideshow">
+        <div class="slides">
+            <img src="a11.jpg" alt="Slide 1">
+            <img src="a2.jpg" alt="Slide 2">
+            <img src="a3.jpg" alt="Slide 3">
+        </div>
+        <div class="slideshow-buttons">
+            <button onclick="prevSlide()">&#10094;</button>
+            <button onclick="nextSlide()">&#10095;</button>
+        </div>
+    </div>
+
+    <div class="hero">
+        <h2>"It's okay to feel overwhelmed. Let's understand it together."</h2>
+    </div>
+
+    <div class="section">
+        <h2>What is Anxiety?</h2>
+        <img src="a11.jpg" alt="What is Anxiety?">
+        <p style="align-items: flex-end;">Anxiety is a normal response to stress, marked by feelings of apprehension, worry, or fear about the future. However, when anxiety becomes excessive and persistent, interfering with daily life, relationships, and overall well-being, it can be considered an anxiety disorder. At this point, anxiety can make it challenging to function, think clearly, and find peace of mind, ultimately impacting one's quality of life.</p>
+    </div>
+    <div class="section">
+        <div class="video-section">
+            <video controls>
+                <source src="angerr.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+    <div class="section">
+        <h2>Symptoms of Anxiety</h2>
+        <p>SSymptoms of anxiety can manifest physically, emotionally, and cognitively. Excessive and persistent worrying about everyday things, restlessness, and feeling on edge are common emotional signs. Physically, anxiety can cause rapid heartbeat, palpitations, or increased blood pressure, as well as physical tension, such as muscle strain, tremors, or twitching. Difficulty concentrating, memory lapses, or indecisiveness are also cognitive symptoms that can impact daily life. Recognizing these signs early on can lead to timely intervention, helping to prevent anxiety from escalating and improving overall mental health and well-being.</p>
+        <img src="a3.jpg" alt="Symptoms of Anxiety">
+    </div>
+
+    <div class="section">
+        <h2>How to Manage Anxiety</h2>
+        <img src="a4.jpg" alt="Managing Anxiety">
+        <p>Effective management of anxiety requires a multifaceted approach. Practicing mindfulness through techniques like meditation and deep breathing can help calm the mind and reduce anxiety. Engaging in regular physical activity, such as walking or yoga, can also reduce symptoms by releasing endorphins, also known as "feel-good" hormones. Maintaining a healthy diet rich in whole foods, fruits, and vegetables is essential for supporting mental health. Additionally, seeking professional therapy, such as cognitive-behavioral therapy (CBT), or joining support groups can provide a safe space to share experiences and receive guidance from trained professionals. By incorporating these strategies into daily life, individuals can better manage anxiety and improve their overall well-being.</p>
+    </div>
+
+    <div class="services">
+        <div class="service-card">
+            <div class="service-card" onclick="showPopup(1)">
+            <img src="4.jpg" alt="Social Anxiety">
+            <h3>Social Anxiety Disorder</h3>
+            <button>Read More</button>
+        </div></div>
+        <div class="service-card">
+            <div class="service-card" onclick="showPopup(2)">
+            <img src="3.jpg" alt="Panic Disorder">
+            <h3>Panic Disorder</h3>
+            <button>Read More</button>
+        </div></div>
+        <div class="service-card">
+            <div class="service-card" onclick="showPopup(3)">
+            <img src="2.jpg" alt="PTSD">
+            <h3>Post-Traumatic Stress Disorder</h3>
+            <button>Read More</button>
+        </div></div>
+        <div class="service-card">
+            <div class="service-card" onclick="showPopup(4)">
+            <img src="anxiety4.jpg" alt="OCD">
+            <h3>Obsessive-Compulsive Disorder</h3>
+            <button>Read More</button>
+        </div></div>
+        <div class="service-card">
+            <div class="service-card" onclick="showPopup(5)">
+            <img src="anger2.jpg" alt="Phobias">
+            <h3>Phobias</h3>
+            <button>Read More</button>
+        </div></div>
+    </div>
+    <!-- Popup and Overlay -->
+    <div class="overlay" onclick="closePopup()"></div>
+    <div class="popup" id="popup">
+        <button class="close-btn" onclick="closePopup()">&times;</button>
+        <h2 id="popup-title"></h2>
+        <img id="popup-image" src="" alt="">
+        <p id="popup-content"></p>
+    </div>
+    <footer>
+        <div class="footer-container">
+          <!-- About Us Section -->
+          <div class="footer-section about">
+            <h3>About Cerebro</h3>
+            <p>Cerebro is dedicated to helping individuals achieve mental wellness through personalized support and practical resources. Our mission is to empower you to live a happier, more fulfilling life.</p>
+            <p>Join us on this journey toward better mental health and personal growth.</p>
+          </div>
+      
+          <!-- Quick Links Section -->
+          <div class="footer-section links">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li><a href="#">FAQs</a></li>
+              <li><a href="#">Blog</a></li>
+            </ul>
+          </div>
+      
+          <!-- Contact Section -->
+          <div class="footer-section contact">
+            <h3>Contact Us</h3>
+            <p><strong>Address:</strong>Government College University Faisalabad</p>
+            <p><strong>Email:</strong> support@cerebro.com</p>
+            <p><strong>Phone:</strong> +1 (123) 456-7890</p>
+          </div>
+      
+          <!-- Social Media Section -->
+          <div class="footer-section social">
+            <h3>Follow Us</h3>
+            <p>Stay connected with us on social media:</p>
+            <div class="social-links">
+              <a href="#"><img src="fb.jpg" alt="Facebook"></a>
+              <a href="#"><img src="tw.jpg" alt="Twitter"></a>
+              <a href="#"><img src="in.jpg" alt="Instagram"></a>
+              <a href="#"><img src="link.jpeg" alt="LinkedIn"></a>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+          <p>© 2024 Cerebro | All Rights Reserved | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+      </footer>
+    <script>
+ 
+        function showPopup(cardIndex) {
+            const popupData = [
+            {
+                title: 'Social Anxiety Disorder',
+                image: '9.jpg',
+                content: [
+                  'Social anxiety disorder, also known as social phobia, is a mental health condition characterized by an intense and persistent fear of social situations. People with social anxiety disorder often feel anxious or avoidant in situations where they may be judged, evaluated, or scrutinized by others, such as parties, meetings, or public speaking events. They may fear being embarrassed, rejected, or humiliated, and may experience physical symptoms like rapid heartbeat, sweating, and trembling. Social anxiety disorder can interfere with daily life, relationships, and work or school performance, but it can be treated with therapies like cognitive-behavioral therapy (CBT) and medication.'],
+              },
+              
+              
+                {
+                    title: 'Panic Disorder',
+                    image: '3.jpg',
+                    content: 'Panic disorder is a mental health condition characterized by recurring panic attacks, which are intense episodes of fear or discomfort that reach a peak within minutes. During a panic attack, individuals may experience physical symptoms such as rapid heartbeat, sweating, trembling, and shortness of breath, as well as psychological symptoms like feelings of impending doom, dread, or loss of control. Panic disorder can be debilitating, causing individuals to avoid certain situations or places that they fear may trigger an attack, and can also interfere with daily life, relationships, and work or school performance. Treatment for panic disorder typically involves a combination of therapy, such as cognitive-behavioral therapy (CBT), and medication.'
+                },
+                {
+                    title: 'Post-Traumatic Stress Disorder',
+                    image: 'new.jpg',
+                    content: 'Post-Traumatic Stress Disorder (PTSD) is a mental health condition that develops after a person experiences a traumatic event, such as combat, assault, natural disaster, or abuse. Individuals with PTSD may relive the traumatic event through flashbacks, nightmares, or intrusive memories, and may also experience avoidance behaviors, such as avoiding people, places, or activities that remind them of the trauma. Other symptoms may include increased arousal, such as difficulty sleeping or concentrating, and hypervigilance, or an exaggerated startle response. PTSD can significantly impact daily life, relationships, and overall well-being, but effective treatments, including therapy and medication, are available to help manage symptoms and promote recovery.'
+                },
+                {
+                    title: 'Obsessive-Compulsive Disorder',
+                    image: '4.jpg',
+                    content: 'Obsessive-Compulsive Disorder (OCD) is a mental health condition characterized by recurring, intrusive thoughts (obsessions) and repetitive behaviors (compulsions) that an individual feels compelled to perform. Common obsessions include fears of contamination, harm, or symmetry, while compulsions may involve excessive cleaning, checking, or arranging. Individuals with OCD may experience significant distress and anxiety if they are unable to perform their compulsions, and the condition can interfere with daily life, relationships, and work or school performance. While OCD can be challenging to treat, a combination of therapies, such as Exposure and Response Prevention (ERP) and medication, can help manage symptoms and improve quality of life.'
+                },
+                {
+                    title: 'Phobias',
+                    image: 'anxiety2.jpg',
+                    content: 'Phobias are intense, irrational fears of specific objects, situations, or activities that pose little to no actual danger. Common phobias include fear of spiders (arachnophobia), snakes (ophidiophobia), heights (acrophobia), enclosed spaces (claustrophobia), and flying (aviatophobia). People with phobias may experience anxiety, panic, or avoidance behaviors when confronted with the feared object or situation. In severe cases, phobias can interfere with daily life, relationships, and work or school performance. Treatment for phobias typically involves exposure therapy, cognitive-behavioral therapy (CBT), or relaxation techniques to help manage symptoms and overcome the fear.'
+                }
+            ];
+
+            const data = popupData[cardIndex - 1];
+            document.getElementById('popup-title').innerText = data.title;
+            document.getElementById('popup-image').src = data.image;
+            document.getElementById('popup-content').innerText = data.content;
+            document.querySelector('.overlay').style.display = 'block';
+            document.querySelector('.popup').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.querySelector('.overlay').style.display = 'none';
+            document.querySelector('.popup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

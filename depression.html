@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Depression</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e3f2fd;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(90deg, #e24ab4, #cb119c77);
+            border-radius: 100px;
+            max-width: 100%;
+            color: white;
+            text-align: center;
+            padding: 0.5rem;
+            font-size: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .slideshow-container {
+            position: relative;
+            max-width: 85%;
+            margin: auto;
+            overflow: hidden;
+            border-radius: 70px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .slides {
+            display: none;
+            width: 100%;
+        }
+        .slideshow-container img {
+            width: 100%;
+            height: auto;
+        }
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            padding: 1rem;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+        }
+        .prev {
+            left: 20px;
+        }
+        .next {
+            right: 20px;
+        }
+        .section {
+            padding: 2rem;
+            margin: 1rem;
+            background: rgba(245, 173, 239, 0.493);
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        .section img {
+            width: 50%;
+            border-radius: 100px;
+        }
+        .image-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem 0;
+        }
+        
+        .image-center img {
+            width: auto;
+            max-width: 80%; /* Adjust this as needed */
+            aspect-ratio: 16/9; /* Ensures the 16:9 ratio */
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+          
+         /* Video Section */
+         .video-section {
+            margin: 20px 0;
+            background-color: #e24ab45d;
+            backdrop-filter: blur(2px);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(197, 8, 156, 0.199);
+            text-align: center;
+        }
+
+        .video-section video {
+            max-width: 70%;
+            border-radius: 60px;
+        }
+        .services {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            overflow-x: auto;
+            margin: 1rem;
+        }
+        .service-card {
+            flex: 0 0 300px;
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1), -6px -6px 12px rgba(255, 255, 255, 0.9);
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+        .service-card:hover {
+            transform: scale(1.1);
+        }
+        .service-card img {
+            border-radius: 50%;
+            width: 80px;
+            margin-bottom: 1rem;
+        }
+        .service-card button {
+            padding: 0.5rem 1rem;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .service-card button:hover {
+            background-color: #357abd;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            animation: popup-slide-in 0.5s ease-out;
+        }
+        .popup img {
+            width: auto;
+            max-width: 80%; /* Adjust this as needed */
+            aspect-ratio: 16/9; /* Ensures the 16:9 ratio */
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 0.5rem;
+            cursor: pointer;
+        }
+
+        @keyframes popup-slide-in {
+            from {
+                transform: translate(-50%, -60%);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, -50%);
+                opacity: 1;
+            }
+        }
+        /* Footer Styles */
+footer {
+    background: #6a0dad;
+    color: white;
+    padding: 3rem 2rem;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .footer-section {
+    margin: 0;
+  }
+  
+  .footer-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #f3efff;
+  }
+  
+  .footer-section p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-section ul li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .footer-section ul li a {
+    color: #f3efff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+  }
+  
+  .footer-section ul li a:hover {
+    color: #e0c1f4;
+  }
+  
+  .social-links a {
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+  }
+  
+  .social-links a:hover {
+    transform: scale(1.2);
+  }
+  
+  .social-links img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .social-links img:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    border-top: 3px solid rgba(255, 255, 255, 0.3);
+    padding-top: 1rem;
+  }
+  
+  .footer-bottom p {
+    font-size: 0.8rem;
+    margin: 0;
+  }
+  
+  .footer-bottom a {
+    color: #f3efff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-bottom a:hover {
+    color: #e0c1f4;
+  }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Cerebro - Understanding Depression</h1>
+        <br>
+        <br>
+    </header>
+
+    <!-- Slideshow -->
+    <div class="slideshow-container">
+        <br>
+        <img class="slides" src="1.jpg" alt="Depression Awareness">
+        <img class="slides" src="2..jpg" alt="Causes of Depression">
+        <img class="slides" src="3..jpg" alt="Symptoms of Depression">
+        <img class="slides" src="4..jpg" alt="Preventing Depression">
+        <button class="arrow prev" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="arrow next" onclick="changeSlide(1)">&#10095;</button>
+        
+    </div>
+
+    <!-- Content Sections -->
+    <div class="section">
+        <img src="6.jpg" alt="Introduction">
+        <div>
+            <h2>Introduction</h2>
+            <p>Depression is a profound and pervasive mental health disorder that affects millions of individuals worldwide, regardless of their age, gender, or socioeconomic background. It is a complex and multifaceted condition characterized by persistent feelings of sadness, hopelessness, and a lack of interest or pleasure in activities that were once enjoyed. Depression can manifest in various forms, including major depressive disorder, dysthymia, postpartum depression, and seasonal affective disorder, each with its unique set of symptoms and challenges. Despite its prevalence, depression remains shrouded in stigma and misconception, leading many individuals to suffer in silence, afraid to seek help or disclose their struggles to others. The impact of depression extends far beyond the individual, affecting relationships, work or school performance, and overall quality of life. If left untreated, depression can lead to severe consequences, including suicidal thoughts and behaviors, making it essential to recognize the warning signs, encourage open conversations, and provide accessible and effective treatment options to those struggling with this debilitating condition.</p>
+            <h3>Here are some common causes of depression:</h3>
+            <pre style="font-family: 'Poppins', sans-serif;">
+
+                Biological Causes:
+                
+                1. Genetics: Family history of depression
+                2. Neurotransmitter imbalance: Serotonin, dopamine, and norepinephrine
+                3. Hormonal changes: Thyroid disorders, menstrual cycle, pregnancy
+                
+                Psychological Causes:
+                
+                1. Trauma: Childhood abuse, neglect, or loss
+                2. Stress: Chronic stress, anxiety, or pressure
+                3. Loss and grief: Bereavement, divorce, or separation
+                
+                Medical Causes:
+                
+                1. Chronic illness: Diabetes, heart disease, or chronic pain
+                2. Medication side effects: Certain antidepressants, steroids
+                3. Sleep disorders: Insomnia, sleep apnea
+                </pre>
+        </div>
+    </div>
+    <div class="image-center">
+        <img src="8...jpg" alt="Symptoms">
+    </div>
+    
+    <div class="section">
+        <div>
+            <h2>Symptoms</h2>
+            <h3>Here's a comprehensive list of symptoms of depression:</h3>
+            <pre style="font-family: 'Poppins', sans-serif;">
+                Emotional Symptoms
+                
+                1. Persistent feelings of sadness, emptiness, and hopelessness
+                2. Loss of interest or pleasure in activities that were once enjoyed
+                3. Feelings of guilt, worthlessness, or helplessness
+                4. Mood swings or rapid mood changes
+                
+                Physical Symptoms
+                
+                1. Changes in appetite or weight
+                2. Fatigue, low energy, or feeling sluggish
+                3. Difficulty sleeping or oversleeping
+                4. Physical pain or discomfort (e.g., headaches, stomachaches)
+                
+                Cognitive Symptoms
+                
+                1. Memory problems or forgetfulness
+                2. Negative thinking patterns or self-criticism
+                3. Lack of motivation or interest in activities
+                4. Difficulty with problem-solving or learning new things
+                
+                Behavioral Symptoms
+                
+                1. Social withdrawal or isolation
+                2. Loss of interest in sex or intimacy
+                3. Changes in work or school performance
+                4. Engaging in self-destructive or risk-taking behaviors</pre>
+        </div>
+        <div>
+            <h2>Prevention</h2>
+            <h3>Here are some effective ways to prevent depression:</h3>
+            <pre style="font-family: 'Poppins', sans-serif;">
+                Self-Care
+                
+                1. Exercise regularly: Physical activity reduces stress and anxiety.
+                2. Healthy eating: Balanced diet rich in fruits, vegetables, and whole grains.
+                3. Sleep well: Aim for 7-8 hours of sleep per night.
+                4. Relaxation techniques: Practice meditation, yoga, or deep breathing.
+                5. Engage in hobbies: Activities that bring joy and fulfillment.
+                
+                Stress Management
+                
+                1. Identify triggers: Recognize situations that cause stress and anxiety.
+                2. Develop coping strategies: Problem-solving, journaling, or seeking support.
+                3. Take breaks: Regularly take time off to relax and recharge.
+                
+                Mental Health
+                
+                1. Seek professional help: Consult a therapist or counselor.
+                2. Practice mindfulness: Focus on the present moment.
+                3. Challenge negative thoughts: Reframe negative self-talk.
+                
+                Professional Help
+                
+                1. Consult a mental health professional.
+                2. Consider therapy or counseling.
+                3. Join a support group.</pre>
+        </div>
+    <div>
+
+        
+    </div>
+    </div>
+        
+            <div class="video-section">
+                <video controls>
+                    <source src="yoga.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+   
+
+    <!-- Service Cards -->
+    <div class="services">
+        <div class="service-card" onclick="showPopup(1)">
+            <img src="10.jpg" alt="Type 1">
+            <h3>Major Depression</h3>
+            <button>Read More</button>
+        </div>
+        <div class="service-card" onclick="showPopup(2)">
+            <img src="2.jpg" alt="Type 2">
+            <h3>Bipolar Disorder</h3>
+            <button>Read More</button>
+        </div>
+        <div class="service-card" onclick="showPopup(3)">
+            <img src="3.jpg" alt="Type 3">
+            <h3>Postpartum Depression</h3>
+            <button>Read More</button>
+        </div>
+        <div class="service-card" onclick="showPopup(4)">
+            <img src="4.jpg" alt="Type 4">
+            <h3>Seasonal Affective Disorder</h3>
+            <button>Read More</button>
+        </div>
+        <div class="service-card" onclick="showPopup(5)">
+            <img src="7.jpg" alt="Type 5">
+            <h3>Persistent Depressive Disorder</h3>
+            <button>Read More</button>
+        </div>
+    </div>
+
+    <!-- Popup and Overlay -->
+    <div class="overlay" onclick="closePopup()"></div>
+    <div class="popup" id="popup">
+        <button class="close-btn" onclick="closePopup()">&times;</button>
+        <h2 id="popup-title"></h2>
+        <img id="popup-image" src="" alt="">
+        <p id="popup-content"></p>
+    </div>
+    <footer>
+        <div class="footer-container">
+          <!-- About Us Section -->
+          <div class="footer-section about">
+            <h3>About Cerebro</h3>
+            <p>Cerebro is dedicated to helping individuals achieve mental wellness through personalized support and practical resources. Our mission is to empower you to live a happier, more fulfilling life.</p>
+            <p>Join us on this journey toward better mental health and personal growth.</p>
+          </div>
+      
+          <!-- Quick Links Section -->
+          <div class="footer-section links">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li><a href="#">FAQs</a></li>
+              <li><a href="#">Blog</a></li>
+            </ul>
+          </div>
+      
+          <!-- Contact Section -->
+          <div class="footer-section contact">
+            <h3>Contact Us</h3>
+            <p><strong>Address:</strong>Government College University Faisalabad</p>
+            <p><strong>Email:</strong> support@cerebro.com</p>
+            <p><strong>Phone:</strong> +1 (123) 456-7890</p>
+          </div>
+      
+          <!-- Social Media Section -->
+          <div class="footer-section social">
+            <h3>Follow Us</h3>
+            <p>Stay connected with us on social media:</p>
+            <div class="social-links">
+              <a href="#"><img src="fb.jpg" alt="Facebook"></a>
+              <a href="#"><img src="tw.jpg" alt="Twitter"></a>
+              <a href="#"><img src="in.jpg" alt="Instagram"></a>
+              <a href="#"><img src="link.jpeg" alt="LinkedIn"></a>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+          <p>© 2024 Cerebro | All Rights Reserved | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+      </footer>
+    <script>
+        let slideIndex = 0;
+
+        function showSlides() {
+            let slides = document.querySelectorAll('.slides');
+            slides.forEach((slide, index) => {
+                slide.style.display = index === slideIndex ? 'block' : 'none';
+            });
+            slideIndex = (slideIndex + 1) % slides.length;
+            setTimeout(showSlides, 3000);
+        }
+
+        function changeSlide(n) {
+            let slides = document.querySelectorAll('.slides');
+            slideIndex = (slideIndex + n + slides.length) % slides.length;
+            slides.forEach((slide, index) => {
+                slide.style.display = index === slideIndex ? 'block' : 'none';
+            });
+        }
+
+        showSlides();
+
+        function showPopup(cardIndex) {
+            const popupData = [
+            {
+                title: 'Major Depression',
+                image: '9.jpg',
+                content: [
+                  'Major depression is characterized by a persistently low mood and loss of interest in activities.',
+                  'Symptoms may include changes in appetite, sleep patterns, and energy levels.',
+                  'If left untreated, major depression can lead to serious consequences, including suicidal thoughts and behaviors.','Major depression is characterized by a persistently low mood and loss of interest in activities. This can manifest in various ways, including: Feeling sad, empty, or hopeless most of the day Loss of interest or pleasure in activities that were once enjoyed Changes in appetite or weight Difficulty sleeping'],
+              },
+              
+              
+                {
+                    title: 'Bipolar Disorder',
+                    image: '3.jpg',
+                    content: 'Bipolar disorder involves periods of depression and periods of elevated mood.Bipolar disorder is a complex mental health condition characterized by recurring episodes of depression and elevated mood, known as mania or hypomania. During depressive episodes, individuals may experience feelings of sadness, hopelessness, and loss of interest in activities, similar to major depressive disorder. In contrast, manic or hypomanic episodes are marked by elevated mood, increased energy, and impulsive behavior, which can lead to reckless decisions and poor judgment. These mood swings can be severe and disrupt daily life, relationships, and overall well-being, making it essential to seek professional help for proper diagnosis and treatment.'
+                },
+                {
+                    title: 'Postpartum Depression',
+                    image: 'new.jpg',
+                    content: 'Postpartum depression (PPD) is a serious mental health condition that affects many new mothers after childbirth. It can manifest as feelings of sadness, hopelessness, anxiety, and overwhelm, making it challenging for mothers to care for themselves and their newborns. PPD can also lead to difficulty bonding with the baby, changes in appetite and sleep patterns, and physical symptoms like headaches and fatigue. If left untreated, PPD can have long-lasting effects on both mother and child, making it essential for new mothers to seek support from healthcare providers, loved ones, and support groups if they,re experiencing symptoms of PPD.'
+                },
+                {
+                    title: 'Seasonal Affective Disorder',
+                    image: '4.jpg',
+                    content: 'Seasonal affective disorder (SAD) is a type of depression that is closely tied to the changing seasons. Typically, symptoms of SAD emerge during the winter months when there is less sunlight, and remit when the days get longer and brighter. People experiencing SAD often report feeling lethargic, sluggish, and socially withdrawn, with increased cravings for carbohydrates and sweets. The reduced sunlight exposure during winter is thought to disrupt the bodys internal clock and serotonin levels, leading to feelings of sadness, hopelessness, and despair. Treatment for SAD often involves light therapy, which helps regulate the bodys internal clock and improve mood.'
+                },
+                {
+                    title: 'Persistent Depressive Disorder',
+                    image: '6.jpg',
+                    content: 'Dysthymia, also known as persistent depressive disorder, is a chronic and mild form of depression that lasts for at least two years. It is characterized by a persistent feeling of sadness, hopelessness, and a lack of interest in activities. Unlike major depressive disorder, dysthymia is a low-grade, ongoing condition that can interfere with daily life, relationships, and work or school performance. Symptoms may include changes in appetite, sleep patterns, and energy levels, as well as difficulty concentrating and making decisions. While dysthymia can be challenging to treat, a combination of medication, therapy, and lifestyle changes can help manage symptoms and improve quality of life.'
+                }
+            ];
+
+            const data = popupData[cardIndex - 1];
+            document.getElementById('popup-title').innerText = data.title;
+            document.getElementById('popup-image').src = data.image;
+            document.getElementById('popup-content').innerText = data.content;
+            document.querySelector('.overlay').style.display = 'block';
+            document.querySelector('.popup').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.querySelector('.overlay').style.display = 'none';
+            document.querySelector('.popup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

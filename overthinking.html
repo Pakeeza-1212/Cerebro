@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>overthinking</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e3f2fd;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(90deg, #e24ab4, #cb119c77);
+            border-radius: 100px;
+            max-width: 100%;
+            color: white;
+            text-align: center;
+            padding: 0.5rem;
+            font-size: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .slideshow-container {
+            position: relative;
+            max-width: 85%;
+            margin: auto;
+            overflow: hidden;
+            border-radius: 70px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .slides {
+            display: none;
+            width: 100%;
+        }
+        .slideshow-container img {
+            width: 100%;
+            height: auto;
+        }
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            padding: 1rem;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+        }
+        .prev {
+            left: 20px;
+        }
+        .next {
+            right: 20px;
+        }
+        .section {
+            padding: 2rem;
+            margin: 1rem;
+            background: rgba(245, 173, 239, 0.493);
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        .section img {
+            width: 50%;
+            border-radius: 100px;
+        }
+        .image-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem 0;
+        }
+        
+        .image-center img {
+            width: auto;
+            max-width: 80%; /* Adjust this as needed */
+            aspect-ratio: 16/9; /* Ensures the 16:9 ratio */
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+          
+         /* Video Section */
+         .video-section {
+            margin: 20px 0;
+            background-color: #e24ab45d;
+            backdrop-filter: blur(2px);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(197, 8, 156, 0.199);
+            text-align: center;
+        }
+
+        .video-section video {
+            max-width: 70%;
+            border-radius: 60px;
+        }
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem;
+        }
+        .gallery-image {
+            width: 200px;
+            height: 150px;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
+        }
+        .gallery-image:hover {
+            transform: scale(1.1);
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+        }
+        .popup img {
+            width: auto;
+            max-width: 50%;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+        }
+        .popup p {
+            font-size: 1.2rem;
+            margin: 0;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 0.5rem;
+            cursor: pointer;
+        }
+
+        @keyframes popup-slide-in {
+            from {
+                transform: translate(-50%, -60%);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, -50%);
+                opacity: 1;
+            }
+        }
+        /* Footer Styles */
+footer {
+    background: #6a0dad;
+    color: white;
+    padding: 3rem 2rem;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .footer-section {
+    margin: 0;
+  }
+  
+  .footer-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #f3efff;
+  }
+  
+  .footer-section p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-section ul li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .footer-section ul li a {
+    color: #f3efff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+  }
+  
+  .footer-section ul li a:hover {
+    color: #e0c1f4;
+  }
+  
+  .social-links a {
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+  }
+  
+  .social-links a:hover {
+    transform: scale(1.2);
+  }
+  
+  .social-links img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .social-links img:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    border-top: 3px solid rgba(255, 255, 255, 0.3);
+    padding-top: 1rem;
+  }
+  
+  .footer-bottom p {
+    font-size: 0.8rem;
+    margin: 0;
+  }
+  
+  .footer-bottom a {
+    color: #f3efff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-bottom a:hover {
+    color: #e0c1f4;
+  }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Cerebro</h1>
+        <h2>Understanding overthinking</h2>
+    </header>
+
+    <!-- Slideshow -->
+    <div class="slideshow-container">
+        <br> 
+        <img class="slides" src="s22.jpg" alt=" ">
+        <img class="slides" src="s55.jpg" alt=" ">
+       <img class="slides" src="s66.jpg" alt=" ">
+        <img class="slides" src="s77.jpg" alt=" ">
+        
+        <button class="arrow prev" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="arrow next" onclick="changeSlide(1)">&#10095;</button>
+        
+    </div>
+
+    <!-- Content Sections -->
+    <div class="section">
+        <div>
+            <h2>Introduction</h2>
+            <p>Overthinking is a pattern of negative and persistent thinking that can interfere with daily life, relationships, and overall well-being. Characterized by excessive and repetitive thinking about a particular topic, situation, or problem, overthinking often leads to feelings of anxiety, worry, and uncertainty. It can be triggered by various factors, such as stress, fear of uncertainty, past experiences, perfectionism, or social media use. If left unchecked, overthinking can have significant effects on mental and physical health, including increased stress, anxiety, and digestive problems, as well as decreased concentration and productivity. However, by recognizing the signs of overthinking and developing strategies such as mindfulness, journaling, and social support, individuals can break the cycle of overthinking and develop healthier thought patterns.</p>
+        </div>
+        <img src="8.jpg" alt="Introduction">
+    </div>
+    <div class="image-center">
+        <img src="a11.jpg" alt="Symptoms">
+    </div>
+    <div class="section">
+        <img src="s4.jpg" alt="Introduction">
+        <div>
+            <h2>Here are the causes of over:</h2>
+            <pre style="font-family: 'Poppins', sans-serif;">
+
+                1. Fear of uncertainty: Fear of the unknown or uncertainty about the future can lead to overthinking.
+
+                2. Past experiences: Traumatic or stressful events in the past can trigger overthinking as a way of trying to make sense of what happened.
+                
+                3. Perfectionism: High expectations and a need for perfection can lead to overthinking as individuals try to anticipate and prevent mistakes.                
+                </pre>
+        </div>
+    </div>
+        
+    </div>
+    </div>
+        
+            <div class="video-section">
+                <video controls>
+                    <source src="stress.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="image-gallery">
+                <img class="gallery-image" src="10.jpg" alt="Overthinking Image 1" onclick="showPopup('10.jpg', 'Overthinking often arises from fear of uncertainty.')">
+                <img class="gallery-image" src="s7.jpg" alt="Overthinking Image 2" onclick="showPopup('s7.jpg', 'Dwelling on the past can intensify overthinking.')">
+                <img class="gallery-image" src="s5.jpg" alt="Overthinking Image 3" onclick="showPopup('s5.jpg', 'Overthinking impacts mental and physical well-being.')">
+                <img class="gallery-image" src="4.jpg" alt="Overthinking Image 4" onclick="showPopup('4.jpg', 'It often stems from striving for perfectionism.')">
+                <img class="gallery-image" src="7.jpg" alt="Overthinking Image 5" onclick="showPopup('7.jpg', 'Managing stress can reduce overthinking patterns.')">
+            </div>
+        
+            <div class="overlay" onclick="closePopup()"></div>
+    <div class="popup" id="popup">
+        <button class="close-btn" onclick="closePopup()">&times;</button>
+        <img id="popup-image" src="" alt="">
+        <p id="popup-text"></p>
+    </div>
+        
+    <footer>
+        <div class="footer-container">
+          <!-- About Us Section -->
+          <div class="footer-section about">
+            <h3>About Cerebro</h3>
+            <p>Cerebro is dedicated to helping individuals achieve mental wellness through personalized support and practical resources. Our mission is to empower you to live a happier, more fulfilling life.</p>
+            <p>Join us on this journey toward better mental health and personal growth.</p>
+          </div>
+      
+          <!-- Quick Links Section -->
+          <div class="footer-section links">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li><a href="#">FAQs</a></li>
+              <li><a href="#">Blog</a></li>
+            </ul>
+          </div>
+      
+          <!-- Contact Section -->
+          <div class="footer-section contact">
+            <h3>Contact Us</h3>
+            <p><strong>Address:</strong>Government College University Faisalabad</p>
+            <p><strong>Email:</strong> support@cerebro.com</p>
+            <p><strong>Phone:</strong> +1 (123) 456-7890</p>
+          </div>
+      
+          <!-- Social Media Section -->
+          <div class="footer-section social">
+            <h3>Follow Us</h3>
+            <p>Stay connected with us on social media:</p>
+            <div class="social-links">
+              <a href="#"><img src="fb.jpg" alt="Facebook"></a>
+              <a href="#"><img src="tw.jpg" alt="Twitter"></a>
+              <a href="#"><img src="in.jpg" alt="Instagram"></a>
+              <a href="#"><img src="link.jpeg" alt="LinkedIn"></a>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+          <p>© 2024 Cerebro | All Rights Reserved | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+      </footer>
+    <script>
+        let slideIndex = 0;
+
+        function showSlides() {
+            let slides = document.querySelectorAll('.slides');
+            slides.forEach((slide, index) => {
+                slide.style.display = index === slideIndex ? 'block' : 'none';
+            });
+            slideIndex = (slideIndex + 1) % slides.length;
+            setTimeout(showSlides, 3000);
+        }
+
+        function changeSlide(n) {
+            let slides = document.querySelectorAll('.slides');
+            slideIndex = (slideIndex + n + slides.length) % slides.length;
+            slides.forEach((slide, index) => {
+                slide.style.display = index === slideIndex ? 'block' : 'none';
+            });
+        }
+
+        showSlides();
+    </script>
+    
+    <script>
+        function showPopup(imageSrc, text) {
+            document.getElementById('popup-image').src = imageSrc;
+            document.getElementById('popup-text').innerText = text;
+            document.querySelector('.overlay').style.display = 'block';
+            document.getElementById('popup').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.querySelector('.overlay').style.display = 'none';
+            document.getElementById('popup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

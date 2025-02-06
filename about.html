@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us</title>
+  <link rel="stylesheet" href="about.css">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <h1 class='bx bxs-brain'> <span style="font-family:Old English Text MT; font-size:40px; color: #b5a1d2; ">Cerebro</span> </h1>
+      <nav class="navbar">
+        <ul>
+          <li><a href="about.html" class="active">About Us</a></li>
+          <li><a href="http://127.0.0.1:5500/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="about-main">
+    <section id="contact-us" class="hero">
+        <div class="container">
+          <h2>About Us</h2>
+          <p>
+            We're here to empower you with the resources and support needed to prioritize your mental health.
+          </p>
+          <blockquote>
+            "Your mental health is a priority. Your happiness is an essential. Your self-care is a necessity."
+           
+          </blockquote>
+        </div>
+      </section>
+      
+
+    <section class="our-story">
+        <div class="container">
+          <div class="story-content">
+            <div class="story-text">
+              <h2>Our Story</h2>
+              <p>
+                Our mission is to provide accessible, reliable, and comprehensive mental health resources to individuals worldwide. 
+                Established in <strong>2012</strong>, our team of experts and advocates work tirelessly to raise awareness, provide tools 
+                for self-care, and connect people with the help they need.
+              </p>
+            </div>
+            <div class="story-image">
+              <img src="story1.png" alt="Story image" />
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <div class="shape-section">
+        <div class="shape-container">
+            <div class="shape-group">
+                <div class="shape square"></div>
+                <div class="shape square"></div>
+                <div class="shape half-circle"></div>
+                <h4 style="font-family:Bodoni MT Black  ; font-size:30px; color:rgba(152, 69, 231, 0.874)">15 Years </h4>
+                <p style="font-family: Old English ; font-size:20px; color:rgba(127, 56, 31, 0.621)" >helping people online</p>
+            </div>
+
+            <div class="shape-group">
+                <div class="shape quarter-circle"></div>
+                <div class="shape triangle"></div>
+                <div class="shape quarter-circle"></div>
+                <h4 style="font-family:Bodoni MT Black  ; font-size:30px; color:rgba(152, 69, 231, 0.874)">566 millions </h4>
+                <p style="font-family: Old English ; font-size:20px; color:rgba(127, 56, 31, 0.621)" >visit since 2012</p>
+            </div>
+
+            <div class="shape-group">
+                <div class="shape overlapping-circles">
+                    <div class="shape circle"></div>
+                    <div class="shape circle"></div>
+                    <div class="shape circle"></div>
+                </div>
+                <h4 style="font-family:Bodoni MT Black  ; font-size:30px; color:rgba(152, 69, 231, 0.874)">240+ </h4>
+                <p style="font-family: Old English ; font-size:20px; color:rgba(127, 56, 31, 0.621)" >countries & territories </p>
+            </div>
+
+            <div class="shape-group">
+              <div class="shape overlapping-circles">
+                  <div class="shape circle"></div>
+                  <div class="shape circle"></div>
+                  <div class="shape circle"></div>
+              </div>
+              <h4 style="font-family:Bodoni MT Black  ; font-size:30px; color:rgba(152, 69, 231, 0.874)">Non-profit </h4>
+              <p style="font-family: Old English ; font-size:20px; color:rgba(127, 56, 31, 0.621)" >with no coporate influence </p>
+          </div>
+        </div>
+    </div>
+
+
+    <section class="team">
+      <div class="container">
+        <h2>Meet Our Team</h2>
+        <div class="team-members">
+          <div class="team-member">
+            <img src="doc1.png" alt="Team Member 1">
+            <h3>Dr. Amna Muhammad</h3>
+            <p>Licensed Psychologist</p>
+          </div>
+          <div class="team-member">
+            <img src="doc2.png" alt="Team Member 2">
+            <h3>John Smith</h3>
+            <p>Mental Health Advocate</p>
+          </div>
+          <div class="team-member">
+            <img src="doc3.png" alt="Team Member 3">
+            <h3> Dr. Sarah</h3>
+            <p>Counseling Therapist</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mission">
+        <div class="container">
+          <div class="mission-content">
+            <div class="mission-text">
+              <h2>Our Mission</h2>
+              <p>
+                We believe that mental health is a right, not a privilege. Our mission is to create a world where stigma is replaced with 
+                support and understanding. Through education, advocacy, and a compassionate community, we aim to inspire hope and promote healing.
+              </p>
+            </div>
+            <div class="mission-image">
+              <img src="cont1.png" alt="Mental health mission image">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <script>
+// Select all elements to animate
+const zoomElements = document.querySelectorAll('.mission-image, .mission-text');
+
+// Create an Intersection Observer
+const observer = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Add the 'visible' class to trigger the animation
+        entry.target.classList.add('visible');
+        // Stop observing after the animation triggers
+        observer.unobserve(entry.target);
+      }
+    });
+  },
+  {
+    threshold: 0.2, // Trigger when 20% of the element is visible
+  }
+);
+
+// Observe each element
+zoomElements.forEach(el => observer.observe(el));
+      </script>
+
+      <section class="testimonial-section">
+        <div class="testimonial-container">
+          <h3 style="font-family:Bodoni MT Black  ; font-size:30px"> Clients  Says</h3>
+          <img src="yes.jpg" alt="Image" class="circle-image">
+          <!-- Testimonial Content -->
+          <p id="testimonial-text" class="testimonial-text">
+            “I don't know how to explain the change this site has made in my life literally overnight. I forgot what makes me happy. I forgot who I once was. Your site has guided me to hope and a plan.”
+          </p>
+          <p id="testimonial-author" class="testimonial-author">From New York</p>
+        </div>
+      
+        <!-- Navigation Buttons -->
+        <button class="nav-btn left-btn" onclick="changeTestimonial('prev')">&#10094;</button>
+        <button class="nav-btn right-btn" onclick="changeTestimonial('next')">&#10095;</button>
+      </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+      <div class="container">
+        <h2>Frequently Asked Questions (FAQ)</h2>
+        <div class="faq-item">
+          <h3>What is mental health?</h3>
+          <p>Mental health includes our emotional, psychological, and social well-being. It affects how we think, feel, and act in our daily lives.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How can I seek help for mental health issues?</h3>
+          <p>
+            You can start by reaching out to a mental health professional, talking to a trusted friend or family member, or exploring resources on our website.
+          </p>
+        </div>
+        <div class="faq-item">
+          <h3>Are your services free?</h3>
+          <p>
+            Many of the resources we offer are free, but some specialized services may involve fees. Check individual resources for details.
+          </p>
+        </div>
+        <div class="faq-item">
+          <h3>How do I support a loved one struggling with mental health?</h3>
+          <p>
+            Be patient, listen without judgment, and encourage them to seek professional help. Educate yourself about mental health to better understand their experience.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <!-- About Us Section -->
+      <div class="footer-section about">
+        <h3>About Cerebro</h3>
+        <p>Cerebro is dedicated to helping individuals achieve mental wellness through personalized support and practical resources. Our mission is to empower you to live a happier, more fulfilling life.</p>
+        <p>Join us on this journey toward better mental health and personal growth.</p>
+      </div>
+  
+      <!-- Quick Links Section -->
+      <div class="footer-section links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+  
+      <!-- Contact Section -->
+      <div class="footer-section contact">
+        <h3>Contact Us</h3>
+        <p><strong>Address:</strong>Government College University Faisalabad</p>
+        <p><strong>Email:</strong> support@cerebro.com</p>
+        <p><strong>Phone:</strong> +1 (123) 456-7890</p>
+      </div>
+  
+      <!-- Social Media Section -->
+      <div class="footer-section social">
+        <h3>Follow Us</h3>
+        <p>Stay connected with us on social media:</p>
+        <div class="social-links">
+          <a href="#"><img src="fb.jpg" alt="Facebook"></a>
+          <a href="#"><img src="tw.jpg" alt="Twitter"></a>
+          <a href="#"><img src="in.jpg" alt="Instagram"></a>
+          <a href="#"><img src="link.jpeg" alt="LinkedIn"></a>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+      <p>© 2024 Cerebro | All Rights Reserved | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </div>
+  </footer>
+
+  <script src="review.js"></script>
+</body>
+</html>

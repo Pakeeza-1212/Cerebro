@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Services</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .slideshow-container {
+      position: relative;
+      max-width: 85%;
+      margin: auto;
+      overflow: hidden;
+      border-radius: 70px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  .slides {
+      display: none;
+      width: 100%;
+  }
+  .slideshow-container img {
+      width: 100%;
+      height: auto;
+  }
+  .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      padding: 1rem;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.5rem;
+  }
+  .prev {
+      left: 20px;
+  }
+  .next {
+      right: 20px;
+  }
+
+    /* Navigation dots */
+    .dot-container {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .dot {
+      height: 15px;
+      width: 15px;
+      margin: 0 5px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .active {
+      background-color: #717171;
+    }
+
+    /* Fade effect */
+    .fade {
+      animation: fade 1.5s;
+    }
+
+    @keyframes fade {
+      from {opacity: .4} 
+      to {opacity: 1}
+    }
+
+  </style>
+</head>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>What We Offer</h1>
+      <p>Delivering Excellence, Tailored for You.</p>
+      <a href="#services" class="cta-button">Explore Services</a>
+    </div>
+  </section>
+  <body>
+    <!-- Slideshow Section -->
+    <div class="slideshow-container">
+      <img class="slides" src="s22.jpg" alt=" ">
+      <img class="slides" src="s55.jpg" alt=" ">
+     <img class="slides" src="s66.jpg" alt=" ">
+  
+      <!-- Navigation Dots -->
+      <div class="dot-container">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+      </div>
+    </div>
+  
+  <!-- Services Section -->
+  <section id="services" class="services">
+    <h2>Our Services</h2>
+    <div class="service-cards">
+      <div class="card">
+        <div class="card-image">
+          <a href="depression.html">
+            <img src="depression.jpg" alt="Service 1">
+            <div class="overlay">
+              <p>Depression</p>
+            </div>
+          </a>
+        </div>
+        <h3>Service One</h3>
+      </div>
+      <div class="card">
+        <div class="card-image">
+          <a href="anxiety.html">
+            <img src="social.jpg" alt="Service 2">
+            <div class="overlay">
+              <p>Anxiety</p>
+            </div>
+          </a>
+        </div>
+        <h3>Service Two</h3>
+      </div>
+      <div class="card">
+        <div class="card-image">
+          <a href="stress.html">
+            <img src="stress.jpg" alt="Service 3">
+            <div class="overlay">
+              <p>Stress</p>
+            </div>
+          </a>
+        </div>
+        <h3>Service Three</h3>
+      </div>
+      <div class="card">
+        <div class="card-image">
+          <a href="overthinking.html">
+            <img src="overthinking-jpeg.jpg" alt="Service 4">
+            <div class="overlay">
+              <p>Overthinking</p>
+            </div>
+          </a>
+        </div>
+        <h3>Service Four</h3>
+      </div>
+      <div class="card">
+        <div class="card-image">
+          <a href="anger.html">
+            <img src="bird.jpg" alt="Service 5">
+            <div class="overlay">
+              <p>Anger</p>
+            </div>
+          </a>
+        </div>
+        <h3>Service Five</h3>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-container">
+      <!-- About Us Section -->
+      <div class="footer-section about">
+        <h3>About Cerebro</h3>
+        <p>Cerebro is dedicated to helping individuals achieve mental wellness through personalized support and practical resources. Our mission is to empower you to live a happier, more fulfilling life.</p>
+        <p>Join us on this journey toward better mental health and personal growth.</p>
+      </div>
+  
+      <!-- Quick Links Section -->
+      <div class="footer-section links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+  
+      <!-- Contact Section -->
+      <div class="footer-section contact">
+        <h3>Contact Us</h3>
+        <p><strong>Address:</strong>Government College University Faisalabad</p>
+        <p><strong>Email:</strong> support@cerebro.com</p>
+        <p><strong>Phone:</strong> +1 (123) 456-7890</p>
+      </div>
+  
+      <!-- Social Media Section -->
+      <div class="footer-section social">
+        <h3>Follow Us</h3>
+        <p>Stay connected with us on social media:</p>
+        <div class="social-links">
+          <a href="#"><img src="fb.jpg" alt="Facebook"></a>
+          <a href="#"><img src="tw.jpg" alt="Twitter"></a>
+          <a href="#"><img src="in.jpg" alt="Instagram"></a>
+          <a href="#"><img src="link.jpeg" alt="LinkedIn"></a>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+      <p>© 2024 Cerebro | All Rights Reserved | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </div>
+  </footer>
+
+  <script>
+    let slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+      const slides = document.querySelectorAll(".slides");
+      const dots = document.querySelectorAll(".dot");
+      slides.forEach(slide => slide.style.display = "none");
+      dots.forEach(dot => dot.classList.remove("active"));
+
+      slideIndex++;
+      if (slideIndex > slides.length) { slideIndex = 1; }
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].classList.add("active");
+
+      setTimeout(showSlides, 3000); // Change slide every 3 seconds
+    }
+
+    function currentSlide(n) {
+      slideIndex = n - 1;
+      showSlides();
+    }
+  </script>
+</body>
+</html>
